@@ -3,6 +3,9 @@
 namespace Drupal\routing_demo\Controller;
 
 use Drupal\user\UserInterface;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Access\AccessResult;
 
 class RouteController {
   public function helloWorld(){
@@ -27,6 +30,13 @@ class RouteController {
     return [
       '#type'  =>  '#markup',
       '#markup'  =>  'Hello'." ".$user->getUsername(),
+    ];
+  }
+
+  public function getNodeDetails(NodeInterface $node) {
+    return [
+      '#type'  =>  '#markup',
+      '#markup'  =>  $node->getTitle(). ' is authored by ' . $node->getOwner()->getAccountName(),
     ];
   }
 

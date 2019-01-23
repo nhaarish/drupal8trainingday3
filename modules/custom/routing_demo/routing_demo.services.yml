@@ -1,0 +1,5 @@
+services:
+  routing_demo.user_same_as_author:
+    class: Drupal\routing_demo\Access\UserAuthorSame
+    tags:
+      - { name: access_check, applies_to: _user_same_as_author }
