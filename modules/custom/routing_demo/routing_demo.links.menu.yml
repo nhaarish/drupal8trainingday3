@@ -1,0 +1,13 @@
+routing_demo.hello_world:
+  title: 'Hello World'
+  description: 'Menu link for Hello World page'
+  route_name: routing_demo.hello_world
+  menu_name: main
+  weight: 100
+
+routing_demo.hello_parameter_converter:
+  title: 'Hello User'
+  description: 'Menu link for parameter upcasting'
+  route_name: routing_demo.hello_parameter_converter
+  parent: routing_demo.hello_world
+  route_parameters: { user: 1}

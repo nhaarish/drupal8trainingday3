@@ -13,3 +13,11 @@ routing_demo.hello_dynamic:
     _title_callback: '\Drupal\routing_demo\Controller\RouteController::helloDynamicTitleCallback'
   requirements:
     _permission: 'access content'
+
+routing_demo.hello_parameter_converter:
+  path: '/hello-parameter/{user}'
+  defaults:
+    _controller: '\Drupal\routing_demo\Controller\RouteController::helloDynamicEntity'
+  requirements:
+    _permission: 'access content'
+
