@@ -3,3 +3,7 @@ services:
     class: Drupal\routing_demo\Access\UserAuthorSame
     tags:
       - { name: access_check, applies_to: _user_same_as_author }
+  
+  routing_demo.getter_setter:
+    class: Drupal\routing_demo\GetterSetter
+    arguments: ['@database']

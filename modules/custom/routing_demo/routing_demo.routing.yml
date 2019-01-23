@@ -21,10 +21,25 @@ routing_demo.hello_parameter_converter:
   requirements:
     _permission: 'access content'
 
-
 routing_demo.get_node_details:
   path: '/node-details/{node}'
   defaults:
     _controller: '\Drupal\routing_demo\Controller\RouteController::getNodeDetails'
   requirements:
     _user_same_as_author: 'true'
+
+routing_demo.simple_form:
+  path: '/simple-form'
+  defaults:
+    _form: '\Drupal\routing_demo\Form\SimpleForm'
+    _title: 'Simple Form'
+  requirements:
+    _permission: 'access content'
+
+routing_demo.di_form:
+  path: '/di-form'
+  defaults:
+    _form: '\Drupal\routing_demo\Form\DIForm'
+    _title: 'Dependency injection Form'
+  requirements:
+    _permission: 'access content'
