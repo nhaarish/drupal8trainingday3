@@ -1,0 +1,10 @@
+weather-block:
+  version: 1.x
+  css:
+    layout:
+      css/weather-block.css: {}
+  js:
+    js/flip.js: {}
+    js/custom.js: {}
+  dependencies:
+    - core/jQuery

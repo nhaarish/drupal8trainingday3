@@ -56,6 +56,11 @@ class WeatherBlock extends BlockBase implements ContainerFactoryPluginInterface{
       '#theme' => 'routing_demo_getter_setter',
       '#firstName' => $firstName,
       '#lastName' => $lastName,
+      '#attached' => [
+        'library' => [
+          'routing_demo/weather-block',
+        ],
+      ],
     ];
     return $build;
   }
