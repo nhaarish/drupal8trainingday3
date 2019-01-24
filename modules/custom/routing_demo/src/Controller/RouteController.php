@@ -6,12 +6,32 @@ use Drupal\user\UserInterface;
 use Drupal\node\NodeInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Access\AccessResult;
+use GuzzleHttp\Client;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 
-class RouteController {
+class RouteController implements ContainerInjectionInterface {
+
+  protected $client;
+
+  public function __construct(Client $client) {
+    $this->client = $client;
+  }
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('http_client')
+    );
+  }
+
   public function helloWorld(){
+    $request = $this->client->request('GET', 'http://jsonplaceholder.typicode.com/posts/1');
+    $response = $request->getBody();
     return[
       '#type' => '#markup',
-      '#markup' => 'Hello World!'
+      '#markup' => $response,
     ];
   }
 
