@@ -43,3 +43,11 @@ routing_demo.di_form:
     _title: 'Dependency injection Form'
   requirements:
     _permission: 'access content'
+
+routing_demo.weather_config:
+  path: '/admin/weather_config'
+  defaults:
+    _form: '\Drupal\routing_demo\Form\WeatherConfigForm'
+    _title: 'Weather Configuration Form'
+  requirements:
+    _permission: 'administer site configuration'
