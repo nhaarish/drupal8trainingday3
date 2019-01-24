@@ -6,6 +6,7 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Config\ConfigFactory;
+use Drupal\routing_demo\GetterSetterInterface;
 
 /**
  * Provides a 'Hello' Block.
@@ -20,13 +21,15 @@ use Drupal\Core\Config\ConfigFactory;
 class WeatherBlock extends BlockBase implements ContainerFactoryPluginInterface{
 
   protected $weatherConfig;
+  protected $getterSetter;
   
   /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactory $configFactory) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactory $configFactory, GetterSetterInterface $getterSetter) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->weatherConfig = $configFactory->get('routing_demo.weather');
+    $this->getterSetter = $getterSetter;
   }
 
   /**
@@ -37,7 +40,8 @@ class WeatherBlock extends BlockBase implements ContainerFactoryPluginInterface{
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('config.factory')
+      $container->get('config.factory'),
+      $container->get('routing_demo.getter_setter')
     );
   }
 
@@ -45,10 +49,15 @@ class WeatherBlock extends BlockBase implements ContainerFactoryPluginInterface{
    * {@inheritdoc}
    */
   public function build() {
-    $weatherConfig =  $this->weatherConfig->get('api_url');
-    return array(
-      '#markup' => $weatherConfig,
-    );
+    $data =  $this->getterSetter->getter();
+    $firstName = $data['first_name'];
+    $lastName = $data['last_name'];
+    $build['data'] = [
+      '#theme' => 'routing_demo_getter_setter',
+      '#firstName' => $firstName,
+      '#lastName' => $lastName,
+    ];
+    return $build;
   }
 
 }

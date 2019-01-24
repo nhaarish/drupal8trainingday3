@@ -21,6 +21,15 @@ class GetterSetter implements GetterSetterInterface, ContainerInjectionInterface
     );
   }
 
+  public function getter() {
+    $query = $this->connection->select('d8_demo', 'u');
+    $query->fields('u', ['first_name', 'last_name']);
+    $query->range(0,1);
+    $result = $query->execute()->fetchAssoc();
+
+    return $result;
+  }
+
   public function setter($firstName, $lastName) {
     return $this->connection->insert('d8_demo')->fields(
       [

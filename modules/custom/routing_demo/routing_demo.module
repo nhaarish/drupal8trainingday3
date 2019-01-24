@@ -1,0 +1,12 @@
+<?php
+
+function routing_demo_theme() {
+  return [
+    'routing_demo_getter_setter' => [
+      'variables' => [
+        'firstName' => NULL,
+        'lastName' => NULL,
+      ],
+    ],
+  ];
+}
